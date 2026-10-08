@@ -30,22 +30,37 @@
   .note { font-size: 19px; line-height: 1.6; color: #3A3F52; }
   .note b { color: #262C42; }
   .note li { margin: 8px 0 0 22px; }
+  /* Version PDF : A4 paysage, aucune publication coupée entre deux pages */
+  @page { size: A4 landscape; margin: 9mm 10mm; }
+  @media print {
+    html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { zoom: .6; width: 1730px; padding: 0; background: #fff; }
+    h1 { font-size: 36px; } .sous { margin: 4px 0 6px; } .regle { margin: 8px 0 0; }
+    h2 { break-after: avoid; margin-top: 10px; }
+    h2.semaine:not(:first-of-type) { break-before: page; }
+    .post { break-inside: avoid; padding: 14px 18px; margin-bottom: 10px; box-shadow: none; border: 1.5px solid #E3E7ED; border-left-width: 10px; }
+    .vignettes img { width: 104px; }
+    .post p { font-size: 13.5px; line-height: 1.45; margin-top: 10px; column-count: 2; column-gap: 34px; }
+    h2.fil-titre { break-before: page; }
+    .fil { break-inside: avoid; margin-top: 20px; }
+    .grille { width: 420px; }
+  }
 </style>
 </head>
 <body>
   <h1>Planning Instagram · BTP Expertise</h1>
-  <p class="sous">Du lundi 12 au vendredi 30 octobre 2026 · 9 carrousels · tout part à 18h30 après validation</p>
-  <div class="regle"><span class="a">LUNDI · AMO</span><span class="r">MERCREDI · RÉSEAU</span><span class="e">VENDREDI · EXPERTISE</span></div>
+  <p class="sous">{{PERIODE}} · {{NOMBRE}} carrousels · Réseau à 12h15, AMO et Expertise à 18h30</p>
+  <div class="regle"><span class="a">LUNDI 18H30 · AMO</span><span class="r">MERCREDI 12H15 · RÉSEAU</span><span class="e">VENDREDI 18H30 · EXPERTISE</span></div>
   {{POSTS}}
-  <h2>Le fil au 30 octobre</h2>
+  <h2 class="fil-titre">Le fil au {{FIN}}</h2>
   <div class="fil">
     <div class="grille">{{GRILLE}}</div>
     <div class="note">
       <p><b>Expertise · Réseau · AMO</b>, une colonne par thématique.</p>
       <ul>
         <li>Chaque série se publie AMO, puis Réseau, puis Expertise : la plus récente arrive en haut à gauche.</li>
-        <li>En grisé, les 6 publications déjà en ligne, une fois l'ancien carrousel fissures supprimé.</li>
-        <li>Prix relus sur btpexpertise.fr/reglement le 08/10 : désordres 1 200 € TTC, réception 750 € TTC, AMO 5 à 8 % HT (min. 3 500 € HT).</li>
+        <li>En grisé, les publications des semaines précédentes.</li>
+        <li>Prix relus sur btpexpertise.fr/reglement le 08/10 : désordres 1 200 € TTC, avant achat 900 € TTC, réception 750 € TTC, AMO 5 à 8 % HT (min. 3 500 € HT).</li>
       </ul>
     </div>
   </div>

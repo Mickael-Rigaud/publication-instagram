@@ -27,6 +27,9 @@ RACINE = os.path.dirname(ICI)
 CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 sys.path.insert(0, ICI)
 from carrousels import CARROUSELS  # noqa: E402
+from carrousels_novembre import NOVEMBRE  # noqa: E402
+
+CARROUSELS = CARROUSELS + NOVEMBRE
 
 THEMES = {"expertise": "EXPERTISE", "amo": "AMO", "reseau": "RÉSEAU"}
 

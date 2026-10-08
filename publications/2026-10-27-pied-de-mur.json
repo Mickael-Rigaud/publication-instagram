@@ -1,0 +1,16 @@
+{
+  "compte": "btp_expertise",
+  "type": "carrousel",
+  "theme": "expertise",
+  "date": "2026-11-06T18:30:00+01:00",
+  "statut": "valide",
+  "legende": "Le bas du mur s'effrite.\n\nSalpêtre, peinture qui cloque, plinthes qui gonflent : l'humidité monte peut-être du sol. Ou pas. Remontées capillaires, infiltration latérale, fuite ou condensation : les traces se ressemblent, les traitements n'ont rien à voir.\n\nÀ éviter : l'enduit étanche sur un mur ancien, le doublage collé qui cache le problème, le traitement choisi au hasard.\n\nLe bon ordre : constater, identifier la cause, choisir le traitement, vérifier la reprise.\n\nExpertise désordres et malfaçons à partir de 1 200 € TTC, devis établi avant toute intervention.\n06 81 65 15 91 · btpexpertise.fr\n\n#expertisebatiment #expertbatiment #nice #cannes #antibes #var #alpesmaritimes #cotedazur #humidite #salpetre",
+  "medias": [
+    "medias/2026-10-27-pied-de-mur-1.jpg",
+    "medias/2026-10-27-pied-de-mur-2.jpg",
+    "medias/2026-10-27-pied-de-mur-3.jpg",
+    "medias/2026-10-27-pied-de-mur-4.jpg",
+    "medias/2026-10-27-pied-de-mur-5.jpg",
+    "medias/2026-10-27-pied-de-mur-6.jpg"
+  ]
+}
