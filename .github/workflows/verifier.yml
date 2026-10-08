@@ -1,0 +1,22 @@
+name: Vérifier les comptes
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Vérifier les jetons (sans rien publier)
+        env:
+          META_TOKEN_BTP_EXPERTISE: ${{ secrets.META_TOKEN_BTP_EXPERTISE }}
+        run: node scripts/verifier.mjs
