@@ -1,0 +1,210 @@
+/* Gabarit des carrousels BTP Expertise.
+   Jetons repris de btpexpertise.fr (site/assets/css/style.css) ; en-tête et compteur
+   repris des carrousels déjà publiés sur le compte. */
+:root {
+  --bleu-nuit: #262C42; --bleu: #0BBBF6; --bleu-sombre: #0A93C2; --bleu-texte: #324A6D; --teinte-bleue: #1B4C8C;
+  --orange: #FF8A00; --texte: #3A3F52; --texte-clair: #6B7186;
+  --gris-fond: #F4F4F4; --gris-bord: #E3E7ED; --ombre-carte: 0 6px 26px rgba(38, 44, 66, .10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1350px; overflow: hidden; }
+.slide { display: none; position: relative; width: 1080px; height: 1350px; padding: 0 70px; font-family: Poppins, sans-serif; color: var(--texte); background: #fff; flex-direction: column; }
+.slide.actif { display: flex; }
+.slide.gris { background: var(--gris-fond); }
+.o { color: var(--orange); } .b { color: var(--bleu); }
+
+header { margin-top: 36px; display: flex; align-items: center; gap: 22px; background: #fff; border-radius: 20px; padding: 16px 26px; box-shadow: var(--ombre-carte); flex: 0 0 auto; }
+header img { height: 78px; }
+header .sep { width: 1.5px; height: 52px; background: var(--gris-bord); }
+header b { display: block; font: 700 19px Montserrat, sans-serif; color: var(--bleu-nuit); letter-spacing: .03em; }
+header span { display: block; font: 400 15px Poppins, sans-serif; color: var(--texte-clair); letter-spacing: .04em; margin-top: 2px; }
+.compteur { margin-left: auto; background: var(--bleu-nuit); color: #fff; font: 700 20px Montserrat, sans-serif; padding: 9px 18px; border-radius: 10px; }
+
+.corps { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 40px; }
+.surtitre { display: flex; align-items: center; gap: 16px; font: 600 21px Montserrat, sans-serif; letter-spacing: .22em; color: var(--orange); text-transform: uppercase; }
+.surtitre::before { content: ""; width: 44px; height: 3px; background: var(--orange); }
+h2 { font: 800 64px/1.12 Montserrat, sans-serif; color: var(--bleu-nuit); margin: 22px 0 18px; letter-spacing: -.01em; }
+.chapo { font: 300 28px/1.55 Poppins, sans-serif; color: var(--texte); }
+
+.carte { background: #fff; border-radius: 18px; box-shadow: var(--ombre-carte); padding: 28px 32px; }
+.carte h3 { font: 700 24px Montserrat, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--bleu-texte); margin-bottom: 6px; }
+.carte p { font: 300 24px/1.5 Poppins, sans-serif; color: var(--texte); }
+.icone { width: 68px; height: 68px; border-radius: 50%; display: grid; place-items: center; flex: 0 0 auto; }
+.icone svg { width: 34px; height: 34px; }
+.ic-o { background: var(--orange); } .ic-b { background: var(--bleu); } .ic-n { background: var(--bleu-nuit); }
+
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 34px; }
+.duo .carte { border-top: 6px solid var(--orange); padding-top: 32px; }
+.duo .carte.bleu { border-top-color: var(--bleu); }
+.duo .carte h3 { margin-top: 20px; color: var(--orange); }
+.duo .carte.bleu h3 { color: var(--bleu-sombre); }
+
+.encadre { margin-top: 28px; background: var(--gris-fond); border-radius: 16px; padding: 24px 30px; font: 400 24px/1.5 Poppins, sans-serif; color: var(--texte-clair); }
+.gris .encadre { background: #fff; }
+.cle { margin-top: 28px; background: var(--bleu-nuit); border-radius: 16px; padding: 28px 34px; display: flex; gap: 24px; align-items: center; color: #fff; font: 600 26px/1.45 Poppins, sans-serif; }
+.cle::before { content: ""; align-self: stretch; width: 6px; border-radius: 3px; background: var(--orange); flex: 0 0 auto; }
+
+.frise { position: relative; margin-top: 28px; display: grid; gap: 16px; }
+.frise::before { content: ""; position: absolute; left: 33px; top: 30px; bottom: 30px; border-left: 2.5px dashed #9DB0CC; }
+.frise.orange::before { border-color: #FFC27A; }
+.etape { position: relative; display: flex; gap: 24px; align-items: flex-start; }
+.rond { width: 66px; height: 66px; border-radius: 50%; background: var(--teinte-bleue); color: #fff; font: 800 21px/66px Montserrat, sans-serif; text-align: center; flex: 0 0 auto; }
+.frise.orange .rond { background: var(--orange); }
+.etape .carte { flex: 1; padding: 20px 28px; }
+.etape .carte h3 { font-size: 21px; }
+.frise.orange .carte h3 { color: var(--orange); }
+.etape .carte p { font-size: 22px; }
+
+.pile { display: grid; gap: 20px; margin-top: 30px; }
+.ligne { display: flex; gap: 26px; align-items: center; border-top: 5px solid var(--orange); }
+.ligne h3 { color: var(--orange); }
+.ligne.bleu { border-top-color: var(--bleu); }
+.ligne.bleu h3 { color: var(--bleu-texte); }
+
+.etiquette { display: inline-block; align-self: flex-start; background: #E3F6FE; color: var(--bleu-sombre); font: 700 20px Montserrat, sans-serif; letter-spacing: .16em; padding: 10px 22px; border-radius: 30px; }
+.etiquette.orange { background: #FFF1E0; color: #E67B00; }
+
+.photo { background: var(--bleu-nuit); color: #fff; }
+.photo .fond { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.photo .voile { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(38,44,66,.55) 0%, rgba(38,44,66,.35) 35%, rgba(38,44,66,.88) 72%, rgba(38,44,66,.96) 100%); }
+.photo > *:not(.fond):not(.voile) { position: relative; }
+.photo .corps { justify-content: flex-end; padding-bottom: 80px; }
+.pastille { align-self: flex-start; display: flex; align-items: center; gap: 14px; border: 1.5px solid rgba(255,255,255,.35); background: rgba(255,255,255,.12); border-radius: 40px; padding: 12px 26px; font: 600 20px Montserrat, sans-serif; letter-spacing: .14em; color: #fff; }
+.pastille::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 4px rgba(255,138,0,.3); }
+h1 { font: 800 88px/1.08 Montserrat, sans-serif; margin: 30px 0 24px; letter-spacing: -.015em; }
+.photo .chapo { color: #E6E8EF; font-size: 30px; }
+
+.boutons { display: flex; gap: 20px; margin-top: 44px; }
+.bouton { font: 600 28px Poppins, sans-serif; color: #fff; padding: 22px 34px; border-radius: 10px; }
+.bouton.or { background: var(--orange); } .bouton.bl { background: var(--bleu); }
+.villes { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
+.villes span { border: 1.5px solid rgba(255,255,255,.3); background: rgba(255,255,255,.08); border-radius: 30px; padding: 10px 22px; font: 600 21px Montserrat, sans-serif; }
+.villes span::before { content: "•"; color: var(--bleu); margin-right: 8px; }
+.prix { margin-top: 36px; font: 300 26px/1.5 Poppins, sans-serif; color: #D4D7E2; }
+.prix b { font-weight: 600; color: #fff; }
+
+/* Couverture sans photo : trois devis côte à côte */
+.devis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin: 10px 0 40px; }
+.devis div { background: #fff; border-radius: 16px; padding: 26px 24px; color: var(--bleu-nuit); box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.devis small { display: block; font: 600 18px Montserrat, sans-serif; letter-spacing: .14em; color: var(--texte-clair); }
+.devis i { display: block; height: 10px; border-radius: 5px; background: var(--gris-bord); margin-top: 12px; }
+.devis i:nth-of-type(2) { width: 75%; } .devis i:nth-of-type(3) { width: 55%; }
+.devis strong { display: block; margin-top: 22px; font: 800 38px Montserrat, sans-serif; }
+.devis div:nth-child(2) strong { color: var(--orange); }
+.fictif { font: 400 18px Poppins, sans-serif; color: rgba(255,255,255,.55); margin-top: -26px; margin-bottom: 30px; }
+
+/* Pages à deux ou trois cartes : on agrandit plutôt que de laisser du vide */
+.large h2 { font-size: 70px; }
+.large .carte { padding: 34px 38px; }
+.large .carte h3, .large .etape .carte h3 { font-size: 27px; }
+.large .carte p, .large .etape .carte p { font-size: 28px; }
+.large .pile, .large .frise { gap: 26px; }
+
+/* ---------------------------------------------------------------------------
+   Thématiques. Trois repères visibles d'un coup d'œil, même en vignette :
+   1. l'étiquette dans l'en-tête ; 2. le bandeau en haut de chaque visuel ;
+   3. la couleur dominante (bleu ciel, orange, bleu nuit).
+   --------------------------------------------------------------------------- */
+.fin .voile { background: rgba(38,44,66,.9); }
+header .theme { margin-left: auto; font: 800 17px Montserrat, sans-serif; letter-spacing: .16em; padding: 9px 16px; border-radius: 10px; }
+header .theme + .compteur { margin-left: 14px; }
+.slide::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 12px; }
+
+/* Expertise : bleu ciel */
+.theme-expertise header .theme { background: #E3F6FE; color: var(--bleu-sombre); }
+.theme-expertise .slide::after { background: var(--bleu); }
+
+/* AMO : orange */
+.theme-amo header .theme { background: #FFF1E0; color: #E67B00; }
+.theme-amo .slide::after { background: var(--orange); }
+.theme-amo .b { color: var(--orange); }
+.theme-amo .ligne.bleu { border-top-color: var(--orange); }
+.theme-amo .ligne.bleu h3 { color: var(--bleu-texte); }
+.theme-amo .ic-n { background: var(--orange); }
+.theme-amo .ic-b { background: var(--bleu-nuit); }
+.theme-amo .duo .carte.bleu { border-top-color: var(--bleu-nuit); }
+.theme-amo .duo .carte.bleu h3 { color: var(--bleu-nuit); }
+.theme-amo .frise .rond { background: var(--orange); }
+.theme-amo .frise::before { border-color: #FFC27A; }
+.theme-amo .frise .carte h3 { color: var(--orange); }
+.theme-amo .etiquette { background: #FFF1E0; color: #E67B00; }
+.theme-amo .fictif { color: rgba(255,255,255,.8); }
+
+
+/* AMO, version douce : couverture et fin sur fond clair, la photo posée
+   en carte arrondie comme les projets de la page AMO du site. */
+.theme-amo .couv, .theme-amo .fin { background: var(--gris-fond); color: var(--bleu-nuit); }
+.theme-amo .couv .voile, .theme-amo .fin .voile { display: none; }
+.theme-amo .couv .fond { inset: auto 70px 70px 70px; height: 470px; border-radius: 22px; box-shadow: var(--ombre-carte); }
+.theme-amo .fin .fond { display: none; }
+.theme-amo .couv .corps { justify-content: flex-start; padding: 70px 0 0; }
+.theme-amo .couv h1 { color: var(--bleu-nuit); }
+.theme-amo .couv h1 .o, .theme-amo .fin h1 .o { color: var(--orange); }
+.theme-amo .couv .chapo, .theme-amo .fin .chapo { color: var(--texte); }
+.theme-amo .pastille { color: #E67B00; background: #FFF1E0; border-color: #FFD3A1; }
+.theme-amo .fin h1 { color: var(--bleu-nuit); }
+.theme-amo .fin .villes span { border-color: var(--gris-bord); background: #fff; color: var(--bleu-nuit); }
+.theme-amo .fin .prix { color: var(--texte-clair); }
+.theme-amo .fin .prix b { color: var(--bleu-nuit); }
+.theme-amo .fictif { color: var(--texte-clair); }
+.theme-amo .devis div { box-shadow: var(--ombre-carte); }
+
+/* Réseau : feuille quadrillée, titre fin, tirets orange */
+.theme-reseau .slide { background-color: #EEF2F7; background-image: linear-gradient(#DCE3EC 1.5px, transparent 1.5px), linear-gradient(90deg, #DCE3EC 1.5px, transparent 1.5px); background-size: 54px 54px; color: var(--bleu-nuit); }
+.theme-reseau header .theme { background: #fff; color: #6B7A90; border: 1.5px solid #CBD3DF; }
+.theme-reseau .slide::after { background: var(--orange); height: 6px; }
+.theme-reseau header { box-shadow: none; border: 1.5px solid #DCE3EC; }
+.theme-reseau .corps { justify-content: center; }
+.theme-reseau .surtitre, .theme-reseau .label { align-self: flex-start; display: block; font: 500 22px Poppins, sans-serif; letter-spacing: .2em; color: #6B7A90; text-transform: uppercase; padding-bottom: 12px; border-bottom: 4px solid var(--orange); }
+.theme-reseau .surtitre::before { display: none; }
+.theme-reseau h1, .theme-reseau h2 { font-family: Poppins, sans-serif; font-weight: 400; color: var(--bleu-nuit); letter-spacing: -.01em; }
+.theme-reseau h1 { font-size: 76px; line-height: 1.18; margin: 70px 0 30px; }
+.theme-reseau h2 { font-size: 60px; line-height: 1.2; margin: 60px 0 24px; }
+.theme-reseau .o, .theme-reseau .b { color: inherit; }
+.theme-reseau .chapo { color: #6B7A90; font: 400 27px/1.55 Poppins, sans-serif; }
+
+.tirets, .theme-reseau .coches { list-style: none; display: grid; gap: 16px; margin: 8px 0 34px; }
+.tirets li, .theme-reseau .coches span, .theme-reseau .carte { position: relative; padding-left: 52px; font: 400 32px/1.4 Poppins, sans-serif; color: var(--bleu-nuit); }
+.tirets li::before, .theme-reseau .coches span::before, .theme-reseau .carte::before { content: ""; position: absolute; left: 0; top: .7em; width: 28px; height: 4px; background: var(--orange); }
+.theme-reseau .coches { grid-template-columns: 1fr 1fr; gap: 18px 30px; }
+.theme-reseau .coches span { font-size: 27px; }
+
+.theme-reseau .carte, .theme-reseau .ligne, .theme-reseau .ligne.bleu { background: none; box-shadow: none; border: 0; border-radius: 0; padding: 0 0 0 52px; display: block; }
+.theme-reseau .carte .icone { display: none; }
+.theme-reseau .carte h3, .theme-reseau .ligne h3, .theme-reseau .frise .carte h3 { font: 500 32px Poppins, sans-serif; text-transform: none; letter-spacing: 0; color: var(--bleu-nuit); margin-bottom: 4px; }
+.theme-reseau .carte p, .theme-reseau .large .carte p { font: 400 26px/1.45 Poppins, sans-serif; color: #6B7A90; }
+.theme-reseau .pile { gap: 34px; margin-top: 14px; }
+.theme-reseau .frise { gap: 30px; margin-top: 14px; }
+.theme-reseau .frise::before { display: none; }
+.theme-reseau .etape { display: block; }
+.theme-reseau .etape .rond { display: none; }
+.theme-reseau .etape .carte { padding: 0 0 0 52px; }
+.theme-reseau .etape .carte::before { content: counter(etape, decimal-leading-zero); counter-increment: etape; width: auto; height: auto; background: none; top: .05em; font: 600 24px Poppins, sans-serif; color: var(--orange); }
+.theme-reseau .frise { counter-reset: etape; }
+.theme-reseau .encadre { background: none; padding: 0; margin-top: 30px; color: #6B7A90; font: 400 25px/1.5 Poppins, sans-serif; }
+
+/* Couverture et fin du réseau, sur la même feuille */
+.couv-titre .corps { justify-content: center; }
+.theme-reseau .fin { color: var(--bleu-nuit); }
+.theme-reseau .fin .voile, .theme-reseau .fin .fond { display: none; }
+.theme-reseau .pastille { color: #6B7A90; background: #fff; border-color: #CBD3DF; }
+.theme-reseau .fin h1 { margin-top: 50px; }
+.theme-reseau .fin .villes span { border-color: #CBD3DF; background: #fff; color: var(--bleu-nuit); }
+.theme-reseau .bouton.bl { background: var(--bleu-nuit); }
+.theme-reseau .fin .prix { color: #6B7A90; }
+.theme-reseau .fin .prix b { color: var(--bleu-nuit); }
+.couv .devis { margin: 70px 0 14px; }
+.couv .fictif { margin: 0; }
+
+/* AMO, version retenue : la même construction que l'expertise (photo pleine
+   page, titre en bas), mais le dégradé descend vers le gris clair du site. */
+.theme-amo .couv .fond, .theme-amo .fin .fond { display: block; inset: 0; height: auto; border-radius: 0; box-shadow: none; }
+.theme-amo .couv .voile { display: block; background: linear-gradient(180deg, rgba(244,244,244,.10) 0%, rgba(244,244,244,0) 28%, rgba(244,244,244,.82) 56%, rgba(244,244,244,.97) 70%, #F4F4F4 100%); }
+.theme-amo .fin .voile { display: block; background: rgba(244,244,244,.93); }
+.theme-amo .couv .corps { justify-content: flex-end; padding: 0 0 80px; }
+.theme-amo .couv .chapo { color: var(--texte); }
+
+/* Lignes du haut, règle validée : expertise bleu clair, AMO orange, réseau bleu foncé.
+   Le réseau passe sur un bleu clair quadrillé. */
+.theme-reseau .slide::after { background: var(--bleu-nuit); height: 12px; }
+.theme-reseau .slide { background-color: #E8F0F8; background-image: linear-gradient(#D3DFEC 1.5px, transparent 1.5px), linear-gradient(90deg, #D3DFEC 1.5px, transparent 1.5px); }

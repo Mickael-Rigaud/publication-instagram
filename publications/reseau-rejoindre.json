@@ -1,0 +1,16 @@
+{
+  "compte": "btp_expertise",
+  "type": "carrousel",
+  "theme": "reseau",
+  "date": "2026-10-14T18:30:00+02:00",
+  "statut": "valide",
+  "legende": "Indépendant du bâtiment ? Travaillons ensemble.\n\nBTP Expertise développe un réseau de professionnels indépendants, pour mobiliser la bonne compétence sur chaque dossier : expertise, structure, humidité, thermique, économie de la construction, électricité, plomberie, couverture…\n\nVous gardez votre structure et votre responsabilité professionnelle. Prérequis : statut indépendant, expérience terrain, RC professionnelle à jour, secteur Alpes-Maritimes et/ou Var.\n\nPrésentez-nous votre profil sur btpexpertise.fr/rejoignez-nous : premier échange téléphonique, sans engagement.\n\n#reseau #independant #batiment #expertbatiment #alpesmaritimes #var #cotedazur",
+  "medias": [
+    "medias/reseau-rejoindre-1.jpg",
+    "medias/reseau-rejoindre-2.jpg",
+    "medias/reseau-rejoindre-3.jpg",
+    "medias/reseau-rejoindre-4.jpg",
+    "medias/reseau-rejoindre-5.jpg",
+    "medias/reseau-rejoindre-6.jpg"
+  ]
+}

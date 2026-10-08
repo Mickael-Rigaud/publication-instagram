@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Scène devis</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Image de fond de la couverture « Trois devis » : trois devis fictifs posés sur un bureau. */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1400px; height: 1750px; overflow: hidden; }
+  body {
+    position: relative; font-family: Inter, sans-serif;
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(255,240,220,.25), transparent 60%),
+      repeating-linear-gradient(92deg, rgba(90,60,35,.10) 0 2px, transparent 2px 9px),
+      repeating-linear-gradient(88deg, rgba(60,38,20,.08) 0 1px, transparent 1px 23px),
+      linear-gradient(180deg, #9C7650 0%, #8A6542 50%, #6F5034 100%);
+  }
+  .vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(30,18,8,.45) 100%); z-index: 10; }
+  .feuille {
+    position: absolute; width: 640px; height: 905px; background: #FBFAF7; padding: 46px 48px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.18), 0 18px 40px rgba(0,0,0,.35);
+    color: #2C3040; font-size: 15px;
+  }
+  .f1 { left: 40px; top: 160px; transform: rotate(-9deg); filter: blur(.6px); }
+  .f2 { left: 560px; top: 90px; transform: rotate(6deg); filter: blur(.4px); }
+  .f3 { left: 300px; top: 640px; transform: rotate(-2deg); }
+  .entete { display: flex; justify-content: space-between; align-items: flex-start; }
+  .logo { width: 120px; height: 42px; border-radius: 4px; }
+  .societe i { display: block; height: 7px; border-radius: 3px; background: #C9CCD6; margin-top: 7px; }
+  .titre { margin-top: 40px; font-weight: 700; font-size: 30px; letter-spacing: .04em; }
+  .num { color: #7A7F90; margin-top: 6px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 34px; }
+  th { text-align: left; font-size: 12px; letter-spacing: .08em; color: #7A7F90; border-bottom: 2px solid #2C3040; padding: 8px 4px; }
+  td { padding: 11px 4px; border-bottom: 1px solid #E2E3E8; font-size: 14px; }
+  td:last-child, th:last-child { text-align: right; }
+  .total { margin-top: 26px; margin-left: auto; width: 270px; }
+  .total div { display: flex; justify-content: space-between; padding: 7px 0; color: #5A5F70; }
+  .total .ttc { border-top: 2px solid #2C3040; margin-top: 4px; padding-top: 12px; font-weight: 700; font-size: 20px; color: #2C3040; }
+  .signature { position: absolute; left: 48px; bottom: 50px; width: 230px; height: 90px; border: 1.5px dashed #C9CCD6; border-radius: 6px; color: #9A9EAE; font-size: 12px; padding: 10px; }
+  .stylo { position: absolute; left: 860px; top: 1180px; width: 520px; height: 26px; border-radius: 13px; transform: rotate(-32deg); z-index: 5;
+    background: linear-gradient(180deg, #3B4258 0%, #1F2436 55%, #11141F 100%); box-shadow: 0 14px 18px rgba(0,0,0,.35); }
+  .stylo::before { content: ""; position: absolute; left: -46px; top: 3px; border-right: 50px solid #C9C2B4; border-top: 10px solid transparent; border-bottom: 10px solid transparent; }
+  .stylo::after { content: ""; position: absolute; right: 70px; top: -6px; width: 150px; height: 8px; border-radius: 4px; background: linear-gradient(#D9DCE4, #9FA4B3); }
+  .surligne { background: linear-gradient(transparent 55%, rgba(255,138,0,.45) 55%); }
+</style>
+</head>
+<body>
+  <div class="feuille f1">
+    <div class="entete"><div class="logo" style="background:#9DB3C9"></div><div class="societe" style="width:170px"><i></i><i style="width:80%"></i><i style="width:60%"></i></div></div>
+    <div class="titre">DEVIS</div><div class="num">N° 2026-0412 · Rénovation salle de bain</div>
+    <table>
+      <tr><th>DÉSIGNATION</th><th>QTÉ</th><th>TOTAL HT</th></tr>
+      <tr><td>Dépose de l'existant</td><td>1 ens.</td><td>950,00</td></tr>
+      <tr><td>Plomberie, forfait</td><td>1 ens.</td><td>2 400,00</td></tr>
+      <tr><td>Carrelage sol et murs</td><td>24 m²</td><td>3 120,00</td></tr>
+      <tr><td>Meuble vasque</td><td>1 u</td><td>1 180,00</td></tr>
+      <tr><td>Peinture plafond</td><td>6 m²</td><td>420,00</td></tr>
+    </table>
+    <div class="total"><div><span>Total HT</span><span>8 070,00</span></div><div><span>TVA 10 %</span><span>807,00</span></div><div class="ttc"><span>Total TTC</span><span>8 877,00 €</span></div></div>
+  </div>
+  <div class="feuille f2">
+    <div class="entete"><div class="logo" style="background:#C9A98D"></div><div class="societe" style="width:170px"><i></i><i style="width:70%"></i><i style="width:85%"></i></div></div>
+    <div class="titre">DEVIS</div><div class="num">Réf. D-26-188 · Salle d'eau complète</div>
+    <table>
+      <tr><th>DÉSIGNATION</th><th>QTÉ</th><th>TOTAL HT</th></tr>
+      <tr><td>Dépose, évacuation gravats</td><td>1 ens.</td><td>1 350,00</td></tr>
+      <tr><td>Réseaux EF/EC, évacuations</td><td>1 ens.</td><td>3 100,00</td></tr>
+      <tr><td>Étanchéité sous carrelage</td><td>14 m²</td><td>980,00</td></tr>
+      <tr><td>Carrelage grand format</td><td>24 m²</td><td>4 060,00</td></tr>
+      <tr><td>Receveur extra-plat, paroi</td><td>1 u</td><td>2 320,00</td></tr>
+    </table>
+    <div class="total"><div><span>Total HT</span><span>11 810,00</span></div><div><span>TVA 10 %</span><span>1 181,00</span></div><div class="ttc"><span>Total TTC</span><span class="surligne">12 991,00 €</span></div></div>
+    <div class="signature">Bon pour accord</div>
+  </div>
+  <div class="feuille f3">
+    <div class="entete"><div class="logo" style="background:#A7B9A0"></div><div class="societe" style="width:170px"><i></i><i style="width:90%"></i><i style="width:55%"></i></div></div>
+    <div class="titre">DEVIS</div><div class="num">N° 0098 · Rénovation complète salle de bain</div>
+    <table>
+      <tr><th>DÉSIGNATION</th><th>QTÉ</th><th>TOTAL HT</th></tr>
+      <tr><td>Préparation, protections</td><td>1 ens.</td><td>640,00</td></tr>
+      <tr><td>Dépose et évacuation</td><td>1 ens.</td><td>1 480,00</td></tr>
+      <tr><td>Plomberie et ventilation</td><td>1 ens.</td><td>4 250,00</td></tr>
+      <tr><td>Étanchéité, carrelage</td><td>26 m²</td><td>5 380,00</td></tr>
+      <tr><td>Équipements sanitaires</td><td>1 ens.</td><td>3 960,00</td></tr>
+    </table>
+    <div class="total"><div><span>Total HT</span><span>15 710,00</span></div><div><span>TVA 10 %</span><span>1 571,00</span></div><div class="ttc"><span>Total TTC</span><span>17 281,00 €</span></div></div>
+    <div class="signature">Bon pour accord</div>
+  </div>
+  <div class="stylo"></div>
+  <div class="vignette"></div>
+</body>
+</html>

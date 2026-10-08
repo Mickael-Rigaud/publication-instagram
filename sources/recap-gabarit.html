@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Planning Instagram</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1400px; background: #F4F4F4; font-family: Poppins, sans-serif; color: #262C42; padding: 50px 50px 60px; }
+  h1 { font: 800 44px Montserrat, sans-serif; }
+  .sous { color: #6B7186; font-size: 20px; margin: 8px 0 10px; }
+  .regle { display: flex; gap: 14px; margin: 18px 0 10px; font: 600 17px Montserrat, sans-serif; letter-spacing: .08em; }
+  .regle span { padding: 8px 16px; border-radius: 8px; }
+  h2 { font: 700 24px Montserrat, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #6B7186; margin: 40px 0 14px; }
+  .post { display: flex; gap: 26px; background: #fff; border-radius: 16px; padding: 22px 24px; margin-bottom: 14px; box-shadow: 0 6px 26px rgba(38,44,66,.08); border-left: 10px solid; }
+  .post.expertise { border-color: #0BBBF6; } .post.amo { border-color: #FF8A00; } .post.reseau { border-color: #262C42; }
+  .quand { width: 150px; flex: 0 0 auto; }
+  .quand b { display: block; font: 800 24px Montserrat, sans-serif; }
+  .quand span { color: #6B7186; font-size: 18px; }
+  .quand em { display: inline-block; margin-top: 12px; font: 700 15px Montserrat, sans-serif; font-style: normal; letter-spacing: .14em; text-transform: uppercase; padding: 6px 12px; border-radius: 8px; }
+  .expertise em, .e { background: #E3F6FE; color: #0A93C2; } .amo em, .a { background: #FFF1E0; color: #E67B00; } .reseau em, .r { background: #262C42; color: #fff; }
+  .contenu { flex: 1; min-width: 0; }
+  .vignettes { display: flex; gap: 6px; }
+  .vignettes img { width: 136px; aspect-ratio: 4 / 5; border-radius: 6px; display: block; }
+  .post p { margin-top: 14px; font-size: 15.5px; line-height: 1.55; color: #3A3F52; }
+  .fil { display: flex; gap: 40px; margin-top: 46px; align-items: flex-start; }
+  .grille { width: 560px; flex: 0 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; background: #fff; padding: 3px; border-radius: 12px; }
+  .grille img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
+  .grille .ancien { opacity: .5; }
+  .note { font-size: 19px; line-height: 1.6; color: #3A3F52; }
+  .note b { color: #262C42; }
+  .note li { margin: 8px 0 0 22px; }
+</style>
+</head>
+<body>
+  <h1>Planning Instagram · BTP Expertise</h1>
+  <p class="sous">Du lundi 12 au vendredi 30 octobre 2026 · 9 carrousels · tout part à 18h30 après validation</p>
+  <div class="regle"><span class="a">LUNDI · AMO</span><span class="r">MERCREDI · RÉSEAU</span><span class="e">VENDREDI · EXPERTISE</span></div>
+  {{POSTS}}
+  <h2>Le fil au 30 octobre</h2>
+  <div class="fil">
+    <div class="grille">{{GRILLE}}</div>
+    <div class="note">
+      <p><b>Expertise · Réseau · AMO</b>, une colonne par thématique.</p>
+      <ul>
+        <li>Chaque série se publie AMO, puis Réseau, puis Expertise : la plus récente arrive en haut à gauche.</li>
+        <li>En grisé, les 6 publications déjà en ligne, une fois l'ancien carrousel fissures supprimé.</li>
+        <li>Prix relus sur btpexpertise.fr/reglement le 08/10 : désordres 1 200 € TTC, réception 750 € TTC, AMO 5 à 8 % HT (min. 3 500 € HT).</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
