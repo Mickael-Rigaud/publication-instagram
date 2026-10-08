@@ -1,0 +1,8 @@
+{
+  "compte": "btp_expertise",
+  "type": "image",
+  "date": "2026-10-10T09:00:00+02:00",
+  "statut": "brouillon",
+  "legende": "Texte de la publication",
+  "medias": ["medias/exemple.jpg"]
+}
