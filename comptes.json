@@ -5,5 +5,11 @@
     "fb_page_id": "1192293697311537",
     "secret": "META_TOKEN_BTP_EXPERTISE",
     "activite": "btp"
+  },
+  "rgd_renova": {
+    "nom": "RGD Renova",
+    "fb_page_id": "246475601890538",
+    "secret": "META_TOKEN_RGD_RENOVA",
+    "activite": "rgd"
   }
 }

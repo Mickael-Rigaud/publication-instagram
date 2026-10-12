@@ -32,4 +32,5 @@ jobs:
           CRM_PUB_URL: https://qnidmkufauzguultdmky.supabase.co/functions/v1/communication-publication
           CRM_PUB_TOKEN: ${{ secrets.CRM_PUB_TOKEN }}
           META_TOKEN_BTP_EXPERTISE: ${{ secrets.META_TOKEN_BTP_EXPERTISE }}
+          META_TOKEN_RGD_RENOVA: ${{ secrets.META_TOKEN_RGD_RENOVA }}
         run: node scripts/publier.mjs

@@ -41,7 +41,7 @@ Si une publication reste bloquée en `en_cours`, le passage s'est interrompu en 
 
 ## Obtenir un jeton de page qui n'expire pas
 
-1. Dans l'Explorateur de l'API Graph (developers.facebook.com/tools/explorer), sélectionnez l'app « Publication Groupe ». Générez un jeton avec ces autorisations : `pages_show_list`, `pages_read_engagement`, `instagram_basic`, `instagram_content_publish`, `business_management`.
+1. Dans l'Explorateur de l'API Graph (developers.facebook.com/tools/explorer), sélectionnez l'app « Publication Groupe ». Générez un jeton avec ces autorisations : `pages_show_list`, `pages_read_engagement`, `pages_manage_posts`, `instagram_basic`, `instagram_content_publish`, `business_management`. ⚠ Cochez TOUTES les pages (BTP Expertise et RGD Renova) : régénérer un jeton avec une page décochée coupe celui de cette page.
 2. Dans le Débogueur de jeton d'accès, cliquez sur « Extend Access Token ».
 3. Revenez dans l'Explorateur avec ce jeton prolongé et lancez `me/accounts?fields=name,access_token,instagram_business_account`. Copiez l'`access_token` de la page voulue.
 4. Vérifiez-le dans le débogueur : la ligne « Expires » doit indiquer « Never ». Collez-le dans le secret GitHub, sans retour à la ligne.

@@ -19,4 +19,5 @@ jobs:
       - name: Vérifier les jetons (sans rien publier)
         env:
           META_TOKEN_BTP_EXPERTISE: ${{ secrets.META_TOKEN_BTP_EXPERTISE }}
+          META_TOKEN_RGD_RENOVA: ${{ secrets.META_TOKEN_RGD_RENOVA }}
         run: node scripts/verifier.mjs

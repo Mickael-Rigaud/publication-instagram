@@ -28,6 +28,21 @@ const COMPTE_DE = Object.fromEntries(Object.entries(comptes)
 
 const pause = ms => new Promise(r => setTimeout(r, ms));
 
+// Le compte Instagram d'une page. `ig_user_id` peut manquer dans comptes.json
+// (RGD Renova, 12/10/2026) : la page le connaît, et son jeton suffit à le lire.
+// On ne le recopie donc pas à la main, une faute de chiffre ne se verrait
+// qu'au premier post refusé.
+const IG_DE = new Map();
+async function igDe(compte, jeton) {
+  if (compte.ig_user_id) return compte.ig_user_id;
+  if (!IG_DE.has(compte.fb_page_id)) {
+    const p = await graph('GET', `/${compte.fb_page_id}`, { fields: 'instagram_business_account' }, jeton);
+    if (!p.instagram_business_account?.id) throw new Error(`aucun compte Instagram professionnel relié à la page ${compte.fb_page_id}`);
+    IG_DE.set(compte.fb_page_id, p.instagram_business_account.id);
+  }
+  return IG_DE.get(compte.fb_page_id);
+}
+
 async function crm(corps) {
   const r = await fetch(CRM_URL, {
     method: 'POST',
@@ -181,9 +196,10 @@ async function publier(c) {
   let resultat = null;
   try {
     if (versInstagram) {
-      const conteneur = await creerConteneur(compte.ig_user_id, type, medias, c.texte, jeton);
+      const igId = await igDe(compte, jeton);
+      const conteneur = await creerConteneur(igId, type, medias, c.texte, jeton);
       await attendreConteneur(conteneur, jeton);
-      const { id } = await graph('POST', `/${compte.ig_user_id}/media_publish`, { creation_id: conteneur }, jeton);
+      const { id } = await graph('POST', `/${igId}/media_publish`, { creation_id: conteneur }, jeton);
       const { permalink } = await graph('GET', `/${id}`, { fields: 'permalink' }, jeton);
       resultat = { media_id: id, lien: permalink };
       console.log(`  publié sur Instagram : ${permalink}`);
