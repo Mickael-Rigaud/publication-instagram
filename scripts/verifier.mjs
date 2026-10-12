@@ -1,4 +1,5 @@
-// Vérifie, sans rien publier, que chaque jeton atteint bien son compte Instagram.
+// Vérifie, sans rien publier, que chaque jeton atteint bien son compte Instagram
+// et sa page Facebook, avec les autorisations de publication.
 // Lancé à la main depuis l'onglet Actions (workflow « Vérifier les comptes »).
 
 import { readFileSync } from 'node:fs';
@@ -22,7 +23,23 @@ for (const [cle, compte] of Object.entries(comptes)) {
     // Quota de publication : n'est accessible qu'avec l'autorisation instagram_content_publish.
     const quota = await lire(`/${compte.ig_user_id}/content_publishing_limit`, { fields: 'quota_usage,config' }, jeton);
     const q = quota.data?.[0];
-    console.log(`  publication autorisée : ${q?.quota_usage ?? 0} / ${q?.config?.quota_total ?? '?'} sur 24 h`);
+    console.log(`  publication Instagram autorisée : ${q?.quota_usage ?? 0} / ${q?.config?.quota_total ?? '?'} sur 24 h`);
+
+    // Un jeton de page répond à /me par la page elle-même.
+    const page = await lire('/me', { fields: 'id,name' }, jeton);
+    console.log(`  page Facebook : ${page.name} (${page.id})`);
+    // debug_token accepte le jeton de page pour s'examiner lui-même.
+    const info = (await lire('/debug_token', { input_token: jeton }, jeton)).data || {};
+    const scopes = info.scopes || [];
+    const expire = info.expires_at ? new Date(info.expires_at * 1000).toISOString().slice(0, 10) : 'jamais';
+    console.log(`  jeton : type ${info.type || '?'}, expire ${expire}`);
+    console.log(`  autorisations : ${scopes.join(', ') || '(illisibles)'}`);
+    for (const requise of ['instagram_content_publish', 'pages_manage_posts']) {
+      if (scopes.length && !scopes.includes(requise)) {
+        console.error(`  MANQUE ${requise}`);
+        process.exitCode = 1;
+      }
+    }
   } catch (e) {
     console.error(`${cle} : ${e.message}`);
     process.exitCode = 1;
