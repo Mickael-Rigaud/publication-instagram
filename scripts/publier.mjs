@@ -111,6 +111,36 @@ async function creerConteneur(igId, type, medias, legende, jeton) {
   return (await graph('POST', `/${igId}/media`, { image_url: m.url, ...cap }, jeton)).id;
 }
 
+// Facebook : la même publication sur la page, avec le même jeton de page
+// (autorisation pages_manage_posts, ajoutée le 12/10/2026).
+// Plusieurs images → photos déposées sans être publiées, puis un seul post qui
+// les rassemble. Une vidéo part en vidéo. Une story ne part pas sur Facebook.
+async function publierFacebook(pageId, type, medias, legende, jeton) {
+  if (type === 'story') return null;
+  const m = medias[0];
+  if (m.type === 'video') {
+    const { id } = await graph('POST', `/${pageId}/videos`, { file_url: m.url, description: legende || '' }, jeton);
+    return `https://www.facebook.com/${pageId}/videos/${id}`;
+  }
+  if (medias.length === 1) {
+    const { post_id, id } = await graph('POST', `/${pageId}/photos`, { url: m.url, caption: legende || '' }, jeton);
+    return lienFacebook(post_id || id, jeton);
+  }
+  const photos = [];
+  for (const p of medias.filter(x => x.type === 'image')) {
+    photos.push((await graph('POST', `/${pageId}/photos`, { url: p.url, published: 'false' }, jeton)).id);
+  }
+  const params = { message: legende || '' };
+  photos.forEach((id, i) => { params[`attached_media[${i}]`] = JSON.stringify({ media_fbid: id }); });
+  const { id } = await graph('POST', `/${pageId}/feed`, params, jeton);
+  return lienFacebook(id, jeton);
+}
+
+async function lienFacebook(id, jeton) {
+  try { return (await graph('GET', `/${id}`, { fields: 'permalink_url' }, jeton)).permalink_url; }
+  catch { return `https://www.facebook.com/${id}`; }
+}
+
 async function publier(c) {
   const cle = COMPTE_DE[c.activity];
   const compte = comptes[cle];
@@ -145,18 +175,44 @@ async function publier(c) {
     console.log('  déjà pris par un autre passage, ou modifié entre-temps');
     return;
   }
+  const reseaux = c.reseaux || ['instagram'];
+  const versInstagram = reseaux.includes('instagram');
+  const versFacebook = reseaux.includes('facebook') && compte.fb_page_id;
+  let resultat = null;
   try {
-    const conteneur = await creerConteneur(compte.ig_user_id, type, medias, c.texte, jeton);
-    await attendreConteneur(conteneur, jeton);
-    const { id } = await graph('POST', `/${compte.ig_user_id}/media_publish`, { creation_id: conteneur }, jeton);
-    const { permalink } = await graph('GET', `/${id}`, { fields: 'permalink' }, jeton);
-    await crm({ action: 'resultat', id: c.id, ok: true, media_id: id, lien: permalink });
-    console.log(`  publié : ${permalink}`);
+    if (versInstagram) {
+      const conteneur = await creerConteneur(compte.ig_user_id, type, medias, c.texte, jeton);
+      await attendreConteneur(conteneur, jeton);
+      const { id } = await graph('POST', `/${compte.ig_user_id}/media_publish`, { creation_id: conteneur }, jeton);
+      const { permalink } = await graph('GET', `/${id}`, { fields: 'permalink' }, jeton);
+      resultat = { media_id: id, lien: permalink };
+      console.log(`  publié sur Instagram : ${permalink}`);
+    }
   } catch (e) {
     await crm({ action: 'resultat', id: c.id, ok: false, erreur: e.message }).catch(() => {});
-    console.error(`  erreur : ${e.message}`);
+    console.error(`  erreur Instagram : ${e.message}`);
     process.exitCode = 1;
+    return;
   }
+
+  // ⚠ Facebook APRÈS Instagram, et son échec n'annule rien : le post Instagram
+  // est parti, le CRM doit dire « Publié ». L'échec Facebook se lit en rouge
+  // dans l'onglet Actions de GitHub.
+  if (versFacebook) {
+    try {
+      const lien = await publierFacebook(compte.fb_page_id, type, medias, c.texte, jeton);
+      if (lien) console.log(`  publié sur Facebook : ${lien}`);
+      if (!resultat) resultat = { media_id: null, lien };
+    } catch (e) {
+      console.error(`  erreur Facebook : ${e.message}`);
+      process.exitCode = 1;
+      if (!resultat) {
+        await crm({ action: 'resultat', id: c.id, ok: false, erreur: `Facebook : ${e.message}` }).catch(() => {});
+        return;
+      }
+    }
+  }
+  await crm({ action: 'resultat', id: c.id, ok: true, ...resultat });
 }
 
 if (!CRM_URL || !CRM_TOKEN) {
@@ -164,7 +220,19 @@ if (!CRM_URL || !CRM_TOKEN) {
   process.exit(1);
 }
 const activites = Object.keys(COMPTE_DE);
-const { contenus } = await crm({ action: 'a_publier', reseau: 'instagram', activites });
+// La porte du CRM filtre par réseau sans renvoyer la liste des réseaux d'un
+// contenu : on la demande pour chacun et on fusionne, un contenu coché
+// Instagram et Facebook ne partant qu'une fois (une seule réservation).
+const parId = new Map();
+for (const reseau of ['instagram', 'facebook']) {
+  const { contenus: liste } = await crm({ action: 'a_publier', reseau, activites });
+  for (const c of liste) {
+    const deja = parId.get(c.id);
+    if (deja) deja.reseaux.push(reseau);
+    else parId.set(c.id, { ...c, reseaux: [reseau] });
+  }
+}
+const contenus = [...parId.values()];
 console.log(`${contenus.length} contenu${contenus.length > 1 ? 's' : ''} à publier (${activites.join(', ')})`);
 for (const c of contenus) {
   try { await publier(c); } catch (e) { console.error(`${c.id} : ${e.message}`); process.exitCode = 1; }
