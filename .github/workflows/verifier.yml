@@ -20,4 +20,5 @@ jobs:
         env:
           META_TOKEN_BTP_EXPERTISE: ${{ secrets.META_TOKEN_BTP_EXPERTISE }}
           META_TOKEN_RGD_RENOVA: ${{ secrets.META_TOKEN_RGD_RENOVA }}
+          META_TOKEN_LA_REFERENCE: ${{ secrets.META_TOKEN_LA_REFERENCE }}
         run: node scripts/verifier.mjs

@@ -11,5 +11,12 @@
     "fb_page_id": "246475601890538",
     "secret": "META_TOKEN_RGD_RENOVA",
     "activite": "rgd"
+  },
+  "la_reference_courtage": {
+    "nom": "La Référence Courtage",
+    "ig_user_id": "17841424038621632",
+    "fb_page_id": "1295840506947856",
+    "secret": "META_TOKEN_LA_REFERENCE",
+    "activite": "courtage"
   }
 }
